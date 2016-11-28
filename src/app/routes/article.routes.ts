@@ -4,7 +4,7 @@ import { ArticleListComponent } from '../article-list/article-list.component';
 import { DownloadComponent } from '../download/download.component';
 
 export const SocdocArticleRoutes : Routes = [
-    { path: '', component: DownloadComponent, name:'Home'},
-    { path: 'list', component: ArticleComponent, name:'List'},
-    { path: 'article/:id', component: ArticleListComponent, name:'Article'}
+    { path: '', component: DownloadComponent},
+    { path: 'list', component: ArticleComponent},
+    { path: 'article/:id', component: ArticleListComponent}
 ];
