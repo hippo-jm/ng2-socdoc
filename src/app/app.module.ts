@@ -10,7 +10,8 @@ import { ArticleComponent } from './article/article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { DownloadComponent } from './download/download.component';
 
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router, RouterState } from '@angular/router';
+import * as routeall from '@angular/router';
 import { SocdocArticleRoutes } from './routes/article.routes';
 
 
@@ -30,7 +31,9 @@ import { SocdocArticleRoutes } from './routes/article.routes';
   ],
   providers: [
     {provide:'mail', useClass: MailService},
-    {provide:'api', useValue: 'http:localhost:3000'}
+    {provide:'api', useValue: 'http:localhost:3000'},
+    {provide:'c_route', useValue:routeall},
+    {provide:'c_route1', useValue:RouterState}
     ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +15,21 @@ export class AppComponent {
     this.mail.update(id, text)
   }
 
-  constructor(@Inject('mail') private mail, @Inject('api') private api){
+  c_page(page){
+      return this._router.url === page
+  }
+
+  constructor(@Inject('mail') private mail, @Inject('api') private api, @Inject('c_route') private c_route, @Inject('c_route1') private c_route1, private _router: Router){
+      console.log('hihihi')
+      console.log('hihihi')
+      console.log('hihihi')
+
+      console.log(this._router.url)
+
+      console.log(c_route)
+      console.log(c_route1)
+
+      //console.log(c_route.Router.isActive)
 
   }
 }
