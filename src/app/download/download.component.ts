@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-download',
-  template: `
-    <p>
-      download Works!
-    </p>
-  `,
-  styleUrls: ['./download.component.css']
+  templateUrl: './download.component.html',
+  styleUrls: ['./download.component.css', '../../assets/sass/style.sass']
 })
 export class DownloadComponent implements OnInit {
 

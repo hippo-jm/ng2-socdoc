@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css', '../assets/sass/style.sass']
 })
 export class AppComponent {
   title = 'ap dd p kkk!';
