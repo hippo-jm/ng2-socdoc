@@ -7,4 +7,7 @@ export const SocdocArticleRoutes : Routes = [
     { path: '', component: DownloadComponent},
     { path: 'list', component: ArticleComponent},
     { path: 'article/:id', component: ArticleListComponent}
+
 ];
+
+//{ path: '', redirectTo:'index', pathMatch:'full'},
