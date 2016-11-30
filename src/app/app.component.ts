@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 
+import { ArticleService } from './service/aritcle.service';
 
 @Component({
   selector: 'app-root',

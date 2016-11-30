@@ -6,6 +6,7 @@ import { DownloadComponent } from '../download/download.component';
 export const SocdocArticleRoutes : Routes = [
     { path: '', component: DownloadComponent},
     { path: 'list', component: ArticleComponent},
+    { path: 'article', component: ArticleComponent},
     { path: 'article/:id', component: ArticleListComponent}
 
 ];

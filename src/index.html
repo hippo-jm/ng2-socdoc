@@ -5,9 +5,26 @@
   <title>Ng2 굿닥속닥</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    .loading img{
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      width: 80%;
+      max-width: 160px;
+      height: auto;
+      z-index: 10;
+      border-radius: 50%
+    }
+  </style>
   <script>document.write('<base href="' + '/' + '" />');</script>
 </head>
 <body class="index">
-  <app-root>Loading...</app-root>
+  <app-root>
+    <div class="loading"><img src="./assets/img/goodoc_loading.gif" alt="loading" /></div>
+  </app-root>
 </body>
 </html>
