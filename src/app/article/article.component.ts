@@ -1,7 +1,9 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams, RequestOptions, Request, RequestMethod,ResponseOptions, Response} from '@angular/http';
 import { ArticleService } from '../service/aritcle.service';
+import { DetectService } from '../service/detect.service';
 import {Article} from './article'
+import {DetectService} from "../service/detect.service";
 
 
 
@@ -67,27 +69,31 @@ import {Article} from './article'
 
 @Component({
   selector: 'app-article',
-  template: `
-    <p>
-      article kkk
-    </p>
-  `,
-  providers:[ArticleService],
-  styleUrls: ['./article.component.css']
+  templateUrl:'./article.component.html',
+  // template: `
+  //   <p>
+  //     {{data.code}}
+  //   </p>
+  // `,
+  providers:[ArticleService, DetectService],
+  styleUrls: ['./article.component.css', '../../assets/sass/style.sass']
 })
 export class ArticleComponent implements OnInit {
+  //result1:Array<Object
 
   private articles:Article[];
 
-  constructor(private _articleService:ArticleService) {
-    //this.articles = this._articleService.getPosts();
-    this._articleService.getPosts().subscribe(articles => {
-      this.articles = articles;
-      console.log("?????")
-      console.log(this.articles)
-    });
+  //private articles:Object<{}>;
+  //private data:Article[];
+  //data:Article[];
+  data = {}
+  isMobile = false;
+  isArticle = false;
+  private test;
 
-    console.log(this.articles);
+  kkk = "hihikk";
+
+  constructor(private _articleService:ArticleService, private _detectService:DetectService) {
 
 
 
@@ -119,9 +125,59 @@ export class ArticleComponent implements OnInit {
     // console.log(RequestMethod)
   }
 
+  getArticle(){
+    //return this.articles;
+  }
+
+  init():void{
+    console.log('hihi')
+    console.log('hihi')
+    console.log('hihi')
+    console.log(this.articles)
+
+
+    //decodeURIComponent(window.atob(tmp));
+    //decodeURIComponent(escape(window.atob( str )));
+
+    // tmp
+    this.articles.data.article.body = decodeURIComponent(escape(window.atob(this.articles.data.article.body)))
+    this.articles.data.replies.forEach(function(o, i){
+
+      o.body = decodeURIComponent(escape(window.atob(o.body)))
+    })
+    //JSON.parse(buffer.toString("utf-8"))
+
+    this.isArticle = true;
+  }
+
 
 
   ngOnInit() {
+
+    console.log("asdf")
+    console.log(this._detectService.isMobile());
+    console.log(this._detectService.isMobilePlatform());
+
+    this.test = "우오";
+
+
+    //this.articles = this._articleService.getPosts();
+    this._articleService.getPosts()
+        .subscribe(articles => {
+
+          this.articles = articles; // {data:{}, status:{}}
+
+          this.data = this.articles.data;
+          console.log(this.data)
+          console.log(this.data.article.user)
+
+          this.init();
+
+        },
+        error => console.error('Error: ' + error),
+        () => console.log('Complete!!!')
+    );
+
   }
 
 }

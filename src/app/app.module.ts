@@ -14,6 +14,8 @@ import { RouterModule, Routes, Router, RouterState } from '@angular/router';
 import * as routeall from '@angular/router';
 import { SocdocArticleRoutes } from './routes/article.routes';
 
+import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { SocdocArticleRoutes } from './routes/article.routes';
     DownloadComponent
   ],
   imports: [
+    AlertModule,
     BrowserModule,
     FormsModule,
     HttpModule,

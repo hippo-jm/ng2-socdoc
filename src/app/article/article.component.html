@@ -1,5 +1,249 @@
-<!-- Wrapper -->
-<div [class.index]="c_page('/')">
-<router-outlet></router-outlet>
+<!--<update-meta property="og:description" content="{{data.article.title}}"></update-meta>
+<update-meta property="og:image" content="{{data.article.images[0].url}}"></update-meta>
+<update-meta property="og:url" content="http://www.goodoc.kr/articles/{{data.article.id}}"></update-meta>-->
+
+<div class="wrapper">
+
+  <!-- header -->
+  <div class="header" set-class-when-at-top="fix-to-top">
+    <h1>
+      <img class="large" src="../../assets/img/mw_ci.png" alt="굿닥속닥">
+      <img class="small" src="../../assets/img/mw_ci_small.png" alt="굿닥속닥">
+    </h1>
+    <div class="category">
+      <ul>
+
+        <li *ngFor="let category of data.categories" [class.active]="category.id == data.article.category.id">
+          <div class="category_title">{{category.title}}</div>
+          <div class="category_image">
+            <img src="{{category.web_image}}" />
+          </div>
+        </li>
+
+        <!--<li ng-repeat="category in data.categories" ng-class="{active:category.id == data.article.category.id}" ng-click="popup('카테고리')">
+          <div class="category_title">{{category.title}}</div>
+          <div class="category_image">
+            <img ng-src="{{category.web_image}}" />
+          </div>
+        </li>-->
+      </ul>
+    </div>
+  </div>
+  <!-- // header -->
+
+  <!-- header_mobile -->
+  <div class="header_mobile">
+    <h1><img class="small" src="../../assets/img/mw_ci_small.png" alt="굿닥속닥"></h1>
+  </div>
+  <!-- // header_mobile -->
+
+  <!-- article -->
+  <div class="article"><!-- ng-show="isArticle" -->
+    <div class="article_header">
+      <div class="user">
+        <div class="user_image"><!-- ng-click="popup('프로필이미지')"-->
+          <img [hidden]="!data?.article?.user?.image" src="{{data?.article?.user?.image?.url}}" width="100">
+          <img [hidden]="data?.article?.user?.image" src=".../../assets/img/mw_info_empty_profile.png" width="100">
+        </div>
+        <div class="user_info">
+          <div class="user_name" >{{data?.article?.user?.nick_name}}</div><!-- ng-click="popup('닉네임')"-->
+          <div class="article_date">19.02.02</div><!-- {{data.article.date | convertDate | date:'yyyy-MM-dd'}}-->
+        </div>
+      </div>
+      <div class="tip" *ngIf="data?.article?.type == 'review'" ><!-- ng-click="popup('꿀팁받기_후기')" -->
+        <div class="tip_image">
+          <img src="../../assets/img/mw_ic_tip_text.png" alt="">
+        </div>
+        <div class="tip_count">
+          {{data?.article?.reviewinfo_count}}
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="{'review':data?.article?.type == 'review', 'short':!isBeforeAfter}">
+      <div class="before_after_wrapper" *ngIf="isBeforeAfter">
+        <div class="before_after_label">
+          <img src=".../../assets/img/mw_info_text.png" alt="">
+        </div>
+        <div class="before" ><!-- ng-click="popup('전후사진_후기')"-->
+          <img class="before_image" src="../../assets/img/mw_blank.png">
+          <img class="before_lock" src="../../assets/img/mw_ic_list_lock.png">
+        </div>
+        <div class="after">
+          <img [src]="afterImage.url" >
+        </div>
+      </div>
+      <div class="body" [innerHTML]="data?.article?.body"></div>
+    </div>
+
+    <!-- more button -->
+    <div class="more_btn" *ngIf="data?.article?.type == 'review'" ><!-- ng-click="popup('더보기_후기')"-->
+      <span class="more_btn_text">더보기</span>
+      <span class="more_btn_image">
+        <img src="../../assets/img/mw_ic_arrow.png">
+      </span>
+    </div>
+    <!-- // more button -->
+
+
+    <!-- like, clipping button -->
+    <div class="like_scrap_btn">
+      <a href><!-- ng-click="popup('좋아요')"-->
+        <div class="image">
+          <img src="../../assets/img/mw_ic_like.png" alt="">
+        </div>
+        <div class="text">
+          좋아요 <span class="count">{{data?.article?.like_count}}</span>
+        </div>
+      </a>
+      <a href ><!-- ng-click="popup('스크랩')" -->
+        <div class="image">
+          <img src="../../assets/img/mw_ic_scrap.png" alt="">
+        </div>
+        <div class="text">
+          스크랩 <span class="count">{{data?.article?.scrap_count}}</span>
+        </div>
+      </a>
+    </div>
+    <!-- like, clipping button -->
+
+    <!-- social button -->
+    <div class="social_button">
+      <a href  > <!-- ng-click="social_ga('페이스북')" -->
+        <div class="image">
+          <img src="../../assets/img/mw_ic_sns_facebook.png" alt="">
+        </div>
+        <div class="text">페이스북</div>
+      </a>
+      <a href  target="_blank" alt="Share on Naver"> <!-- ng-click="naverShare('네이버')" -->
+        <div class="image">
+          <img src="../../assets/img/mw_ic_sns_blog.png" alt="">
+        </div>
+        <div class="text">네이버블로그</div>
+      </a>
+      <a href  id="kakao-link-btn" *ngIf="isMobile"><!-- ng-click="social_ga('카카오톡')"-->
+        <div class="image">
+          <img src="../../assets/img/mw_ic_sns_kakao.png" alt="">
+        </div>
+        <div class="text">카카오톡</div>
+      </a>
+      <a href  clipboard text="'http://www.goodoc.kr/articles/'+data.article.id" on-copied="success()" on-error="fail(err)" *ngIf="!isMobile"><!-- ng-click="social_ga('주소복사')" -->
+        <div class="image">
+          <img src="../../assets/img/mw_ic_sns_url.png" alt="">
+        </div>
+        <div class="text">주소복사</div>
+      </a>
+      <a href  *ngIf="isMobile"><!-- ng-click="linkCopy('주소복사')"--><!-- todo :: ngif Vs [hidden] -->
+        <div class="image">
+          <img src="../../assets/img/mw_ic_sns_url.png" alt="">
+        </div>
+        <div class="text">주소복사</div>
+      </a>
+    </div>
+    <!-- social button -->
+
+
+    <!-- link copy -->
+    <!--<div class="link_copy" ng-show="mobile_link_copy">
+      <div class="link_copy_input">
+        <a href="http://www.goodoc.kr/articles/{{data.article.id}}" onclick="return false;">http://www.goodoc.kr/articles/{{data.article.id}}</a>
+
+      </div>
+      <div class="link_copy_text">
+        URL을 길게 누르시면 복사하실 수 있습니다.
+      </div>
+    </div>-->
+    <!-- link copy -->
+
+  </div>
+  <!-- // article -->
+
+  <!-- reply -->
+  <div class="replies" [hidden]="!isArticle">
+    <div class="reply_input">
+      <div class="reply_input_header">
+        <img src="../../assets/img/mw_ic_reple.png"><span>댓글</span><span class="reply_count">{{data?.article?.reply_count}}</span>
+      </div>
+      <div class="reply_input_body" ><!-- ng-click="popup('댓글입력')"-->
+        <div class="reply_input_text">댓글을 입력해주세요</div>
+        <div class="reply_input_button">
+          <img src="../../assets/img/mw_btn_reple.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="reply_input_body_mobile" ><!-- ng-click="popup('댓글입력')"-->
+      <div class="reply_input_text">댓글을 입력해주세요</div>
+      <div class="reply_input_button">
+        등록
+      </div>
+    </div>
+    <div *ngFor="let reply of data.replies" class="reply" [class.child]="!reply?.isParent">
+      <div class="reply_child">
+        <img src="../../assets/img/mw_ic_reple_reple.png" alt="">
+      </div>
+      <div class="reply_header">
+        <div class="user">
+          <div class="user_image" ><!-- ng-click="popup('댓글_프로필이미지')" -->
+            <img [hidden]="!reply?.user?.image" [src]="reply?.user?.image?.url" width="100">
+            <img [hidden]="!reply?.user?.image" src="../../assets/img/mw_info_empty_profile.png" width="100">
+
+          </div>
+          <div class="user_info">
+            <div class="user_name">{{reply?.user?.nick_name}}</div>
+            <div class="article_date">{{reply?.date}}</div><!-- | convertDate | date:'yyyy-MM-dd'-->
+          </div>
+        </div>
+      </div>
+      <div class="reply_body" [innerHTML]="reply?.body">
+
+      </div>
+      <div class="reply_bottom">
+        <div class="reply_bottom_left">
+          <img src="../../assets/img/mw_ic_like_re.png">
+          <span class="reply_like_count">{{reply?.like_count}}</span>
+        </div>
+        <div class="reply_bottom_right">
+          <a href=""><img src="../../assets/img/mw_btn_reple_1.png"></a><!--  ng-click="popup('댓글답글')"-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- // replay -->
+
+  <!-- more -->
+  <div class="more_btn" *ngIf="isArticle"><!-- ng-click="popup('댓글_더보기')"-->
+    <span class="more_btn_text">더보기</span>
+    <span class="more_btn_image">
+            <img src="../../assets/img/mw_ic_arrow.png">
+        </span>
+  </div>
+  <!-- // more -->
+
+  <!-- no content -->
+  <div class="no_article" *ngIf="!isArticle">
+    <div class="no_image">
+      <img src="../../assets/img/mw_info_goodoc.png" alt="">
+    </div>
+    <div class="no_text_title">글이 없어요 ㅜㅜ</div>
+    <div class="no_text">
+      존재하지 않는 글입니다<br />
+      아쉬운 마음 실시간 핫한 글로 달래보아요~
+    </div>
+  </div>
+  <!-- // no content -->
+
+  <!-- hot -->
+  <div class="hot_wrapper">
+    <div class="hot_header">
+      <span class="hot_header_title">실시간 HOT 글</span>
+    </div><!-- <li *ngFor="let category of data.categories" [class.active]="category.id == data.article.category.id">   -->
+    <div class="hot_list" *ngFor="let hot_article of data.hot_articles" [hidden]="isMobile ? $index > 3 : $index > 2" [ngStyle]="{'background-image': 'url(' + hot_article?.image?.url + ')'}" ><!-- ng-click="popup('핫한글보기-'+hot_article.title)"-->
+      <div class="hot_content">
+        <div class="hot_category">[{{hot_article?.category?.title}}]</div>
+        <div class="hot_title">{{hot_article?.title}}<span class="hot_count"> ({{hot_article?.view_count}})</span></div>
+      </div>
+    </div>
+  </div>
+  <!-- // hot -->
+
 </div>
-<!-- Wrapper -->
