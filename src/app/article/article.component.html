@@ -237,7 +237,7 @@
     <div class="hot_header">
       <span class="hot_header_title">실시간 HOT 글</span>
     </div><!-- <li *ngFor="let category of data.categories" [class.active]="category.id == data.article.category.id">   -->
-    <div class="hot_list" *ngFor="let hot_article of data.hot_articles" [hidden]="isMobile ? $index > 3 : $index > 2" [ngStyle]="{'background-image': 'url(' + hot_article?.image?.url + ')'}" ><!-- ng-click="popup('핫한글보기-'+hot_article.title)"-->
+    <div class="hot_list" *ngFor="let hot_article of data.hot_articles.slice(0,2); let i = index"  [ngStyle]="{'background-image': 'url(' + hot_article?.image?.url + ')'}" ><!-- ng-click="popup('핫한글보기-'+hot_article.title)"-->
       <div class="hot_content">
         <div class="hot_category">[{{hot_article?.category?.title}}]</div>
         <div class="hot_title">{{hot_article?.title}}<span class="hot_count"> ({{hot_article?.view_count}})</span></div>
