@@ -1,0 +1,32 @@
+<div class="social_button">
+  <a href  > <!-- ng-click="social_ga('페이스북')" -->
+    <div class="image">
+      <img src="../../assets/img/mw_ic_sns_facebook.png" alt="">
+    </div>
+    <div class="text">페이스북</div>
+  </a>
+  <a href  target="_blank" alt="Share on Naver"> <!-- ng-click="naverShare('네이버')" -->
+    <div class="image">
+      <img src="../../assets/img/mw_ic_sns_blog.png" alt="">
+    </div>
+    <div class="text">네이버블로그</div>
+  </a>
+  <a href  id="kakao-link-btn" *ngIf="isMobile"><!-- ng-click="social_ga('카카오톡')"-->
+    <div class="image">
+      <img src="../../assets/img/mw_ic_sns_kakao.png" alt="">
+    </div>
+    <div class="text">카카오톡</div>
+  </a>
+  <a href  clipboard text="'http://www.goodoc.kr/articles/'+data.article.id" on-copied="success()" on-error="fail(err)" *ngIf="!isMobile"><!-- ng-click="social_ga('주소복사')" -->
+    <div class="image">
+      <img src="../../assets/img/mw_ic_sns_url.png" alt="">
+    </div>
+    <div class="text">주소복사</div>
+  </a>
+  <a href  *ngIf="isMobile"><!-- ng-click="linkCopy('주소복사')"--><!-- todo :: ngif Vs [hidden] -->
+    <div class="image">
+      <img src="../../assets/img/mw_ic_sns_url.png" alt="">
+    </div>
+    <div class="text">주소복사</div>
+  </a>
+</div>

@@ -16,6 +16,13 @@ import { SocdocArticleRoutes } from './routes/article.routes';
 
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 
+import {HotArticleComponent} from "./article/hot-article/hot.component";
+import { BackimgDirective } from './directive/backimg.directive';
+import { ReplyComponent } from './article/reply/reply.component';
+import { FeatureComponent } from './article/feature/feature.component';
+import { SocialComponent } from './article/social/social.component';
+import { HeaderComponent } from './article/header/header.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +30,13 @@ import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
     SimpleFormComponent,
     ArticleComponent,
     ArticleListComponent,
-    DownloadComponent
+    DownloadComponent,
+    BackimgDirective,
+    HotArticleComponent,
+    ReplyComponent,
+    FeatureComponent,
+    SocialComponent,
+    HeaderComponent
   ],
   imports: [
     AlertModule,

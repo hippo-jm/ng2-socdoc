@@ -1,0 +1,49 @@
+<div class="replies" [hidden]="!isArticle">
+  <div class="reply_input">
+    <div class="reply_input_header">
+      <img src="../../assets/img/mw_ic_reple.png"><span>댓글</span><span class="reply_count">{{data?.article?.reply_count}}</span>
+    </div>
+    <div class="reply_input_body" ><!-- ng-click="popup('댓글입력')"-->
+      <div class="reply_input_text">댓글을 입력해주세요</div>
+      <div class="reply_input_button">
+        <img src="../../assets/img/mw_btn_reple.png" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="reply_input_body_mobile" ><!-- ng-click="popup('댓글입력')"-->
+    <div class="reply_input_text">댓글을 입력해주세요</div>
+    <div class="reply_input_button">
+      등록
+    </div>
+  </div>
+  <div *ngFor="let reply of data.replies" class="reply" [class.child]="!reply?.isParent">
+    <div class="reply_child">
+      <img src="../../assets/img/mw_ic_reple_reple.png" alt="">
+    </div>
+    <div class="reply_header">
+      <div class="user">
+        <div class="user_image" ><!-- ng-click="popup('댓글_프로필이미지')" -->
+          <img [hidden]="!reply?.user?.image" [src]="reply?.user?.image?.url" width="100">
+          <img [hidden]="!reply?.user?.image" src="../../assets/img/mw_info_empty_profile.png" width="100">
+
+        </div>
+        <div class="user_info">
+          <div class="user_name">{{reply?.user?.nick_name}}</div>
+          <div class="article_date">{{reply?.date}}</div><!-- | convertDate | date:'yyyy-MM-dd'-->
+        </div>
+      </div>
+    </div>
+    <div class="reply_body" [innerHTML]="reply?.body">
+
+    </div>
+    <div class="reply_bottom">
+      <div class="reply_bottom_left">
+        <img src="../../assets/img/mw_ic_like_re.png">
+        <span class="reply_like_count">{{reply?.like_count}}</span>
+      </div>
+      <div class="reply_bottom_right">
+        <a href=""><img src="../../assets/img/mw_btn_reple_1.png"></a><!--  ng-click="popup('댓글답글')"-->
+      </div>
+    </div>
+  </div>
+</div>

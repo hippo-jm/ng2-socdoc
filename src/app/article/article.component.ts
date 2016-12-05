@@ -3,10 +3,6 @@ import { Http, Headers, URLSearchParams, RequestOptions, Request, RequestMethod,
 import { ArticleService } from '../service/aritcle.service';
 import { DetectService } from '../service/detect.service';
 import {Article} from './article'
-import {DetectService} from "../service/detect.service";
-
-
-
 
 //
 // @Injectable()

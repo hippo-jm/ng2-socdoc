@@ -1,0 +1,30 @@
+<div class="header" set-class-when-at-top="fix-to-top">
+  <h1>
+    <img class="large" src="../../assets/img/mw_ci.png" alt="굿닥속닥">
+    <img class="small" src="../../assets/img/mw_ci_small.png" alt="굿닥속닥">
+  </h1>
+  <div class="category">
+    <ul>
+
+      <li *ngFor="let category of data.categories" [class.active]="category.id == data.article.category.id">
+        <div class="category_title">{{category.title}}</div>
+        <div class="category_image">
+          <img src="{{category.web_image}}" />
+        </div>
+      </li>
+
+      <!--<li ng-repeat="category in data.categories" ng-class="{active:category.id == data.article.category.id}" ng-click="popup('카테고리')">
+        <div class="category_title">{{category.title}}</div>
+        <div class="category_image">
+          <img ng-src="{{category.web_image}}" />
+        </div>
+      </li>-->
+    </ul>
+  </div>
+</div>
+
+<!-- header_mobile -->
+<div class="header_mobile">
+  <h1><img class="small" src="../../assets/img/mw_ci_small.png" alt="굿닥속닥"></h1>
+</div>
+<!-- // header_mobile -->
